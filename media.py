@@ -47,9 +47,11 @@ def generate_views(list):
     return generated_item
 
 def run_generate_views(list):
-    for i in range(10):
+    generate_list = []
+    for _ in range(10):
         generated_item = generate_views(list)
-        print(f"{i+1}) {generated_item}, (number of plays: {generated_item.number_of_plays})")
+        generate_list.append(generated_item)
+    return generate_list
 
 def top_titles(list, qty):
     return sorted([ item for item in list], key=lambda item: item.number_of_plays, reverse=True)[:qty]
@@ -72,9 +74,10 @@ def create_series(qty):
 
 def main():
     print("Biblioteka filmów")
-    media_list  = create_movies(10) + create_series(10)
-    run_generate_views(media_list)
-    top_media = top_titles(media_list, 3)
+    media_list  = create_movies(100) + create_series(200)
+    generate_list = run_generate_views(media_list)
+    show_media(generate_list)
+    top_media = top_titles(generate_list, 3)
     today = datetime.date.today()
     print(f"Najpopularniejsze filmy i seriale dnia {today.strftime('%d.%m.%Y')}")
     show_media(top_media)

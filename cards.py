@@ -12,6 +12,7 @@ class BaseContact:
 
     def contact(self):
         print(f"Wybieram numer {self.phone} i dzwonię do {self.name} {self.surname}")
+
     @property
     def label_length(self):
         return len(self.name) + len(self.surname) + 1
@@ -22,8 +23,10 @@ class BusinessContact(BaseContact):
         self.position = position
         self.company_name = company_name
         self.work_phone = work_phone
+
     def contact(self):
         print(f"Wybieram numer {self.work_phone} i dzwonię do {self.name} {self.surname}")
+
     @property
     def label_length(self):
         return super().label_length
@@ -35,7 +38,7 @@ def create_contacts(card_type, qty):
             card = BaseContact(name=fake.first_name(), surname=fake.last_name(), phone=fake.phone_number(), email=fake.email())
             cards.append(card)
         elif card_type == "business":
-            card = BusinessContact(name=fake.first_name(), surname=fake.last_name(), phone=fake.basic_phone_number(), email=fake.email(), position=fake.job(), company_name=fake.company(), work_phone=fake.phone_number())
+            card = BusinessContact(name=fake.first_name(), surname=fake.last_name(), phone=fake.phone_number(), email=fake.email(), position=fake.job(), company_name=fake.company(), work_phone=fake.phone_number())
             cards.append(card)
         else:
             raise ValueError("cardType must be 'base' or 'business'")
@@ -52,6 +55,7 @@ def main():
     show_contact(cards_base)
     print("Cards business:")
     show_contact(cards_business)
+    print(cards_business[1].label_length)
 
 if __name__ == "__main__":
     main()
