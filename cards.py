@@ -10,12 +10,14 @@ class BaseContact:
         self.phone = phone
         self.email = email
 
+        self._label_length = len(self.name) + len(self.surname) + 1
+        
     def contact(self):
         print(f"Wybieram numer {self.phone} i dzwonię do {self.name} {self.surname}")
 
     @property
     def label_length(self):
-        return len(self.name) + len(self.surname) + 1
+        return self._label_length
 
 class BusinessContact(BaseContact):
     def __init__(self, name, surname, phone, email, position, company_name, work_phone):
@@ -26,10 +28,6 @@ class BusinessContact(BaseContact):
 
     def contact(self):
         print(f"Wybieram numer {self.work_phone} i dzwonię do {self.name} {self.surname}")
-
-    @property
-    def label_length(self):
-        return super().label_length
 
 def create_contacts(card_type, qty):
     cards = []
@@ -51,11 +49,11 @@ def show_contact(cards):
 def main():
     cards_base = create_contacts("base", 5)
     cards_business = create_contacts("business", 5)
-    print("Cards base:")
     show_contact(cards_base)
     print("Cards business:")
     show_contact(cards_business)
-    print(cards_business[1].label_length)
+    print(cards_base[0].label_length)
+    print(cards_business[3].label_length)
 
 if __name__ == "__main__":
     main()
