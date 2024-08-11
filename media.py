@@ -28,13 +28,15 @@ class Serial(Movie):
 
     def __str__(self):
         return f"{self.title} S{self.season_number:02}E{self.episode_number:02}"
-
+    
+def get_sorted_list(list):
+    return sorted(list, key=lambda item: item.title)
 
 def get_movies(list):
-    return sorted([ item for item in list if type(item) is Movie], key=lambda item: item.title)
+    return get_sorted_list([ item for item in list if type(item) is Movie])
 
 def get_series(list):
-    return sorted([ item for item in list if type(item) is Serial], key=lambda item: item.title)
+    return get_sorted_list([ item for item in list if type(item) is Serial])
 
 def search(title, list):
     return [item for item in list if item.title.lower() == title.lower()]
