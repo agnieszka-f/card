@@ -32,11 +32,14 @@ class Serial(Movie):
 def get_sorted_list(list):
     return sorted(list, key=lambda item: item.title)
 
+def check_type(item, type_item):
+    return type(item) is type_item
+
 def get_movies(list):
-    return get_sorted_list([ item for item in list if type(item) is Movie])
+    return get_sorted_list([ item for item in list if check_type(item, Movie)])
 
 def get_series(list):
-    return get_sorted_list([ item for item in list if type(item) is Serial])
+    return get_sorted_list([ item for item in list if check_type(item, Serial)])
 
 def search(title, list):
     return [item for item in list if item.title.lower() == title.lower()]
@@ -77,6 +80,9 @@ def main():
     today = datetime.date.today()
     print(f"Najpopularniejsze filmy i seriale dnia {today.strftime('%d.%m.%Y')}")
     show_media(top_media)
+    print('-----')
+    mm= get_movies(media_list)
+    show_media(mm)
 
 if __name__ == "__main__":
     main()
