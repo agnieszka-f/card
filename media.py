@@ -35,6 +35,12 @@ def get_sorted_list(list):
 def get_media(list, media_type):
     return get_sorted_list([ item for item in list if type(item) is media_type])
 
+def get_movies(list):
+    return get_media(list, Movie)
+
+def get_series(list):
+    return get_media(list, Serial)
+
 def search(title, list):
     return [item for item in list if item.title.lower() == title.lower()]
 
@@ -75,12 +81,11 @@ def main():
     print(f"Najpopularniejsze filmy i seriale dnia {today.strftime('%d.%m.%Y')}")
     show_media(top_media)
     print("\nSorted movies:")
-    movies = get_media(media_list, Movie)
+    movies = get_movies(media_list)
     show_media(movies)
     print("\nSorted series:")
-    series = get_media(media_list, Serial)
+    series = get_series(media_list)
     show_media(series)
-
 
 if __name__ == "__main__":
     main()
